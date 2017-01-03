@@ -21,7 +21,7 @@ router.post('/', function(req, res) {
     bio: req.body.bio
   })
   .then(function(author) {
-    res.redirect('/authors');
+    res.redirect('/posts/new');
   })
   .catch(function(error) {
     res.status(400).render('main/404');

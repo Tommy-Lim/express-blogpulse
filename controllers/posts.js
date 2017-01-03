@@ -32,7 +32,7 @@ router.get('/new', function(req, res) {
 router.get('/:id', function(req, res) {
   db.post.find({
     where: { id: req.params.id },
-    include: [db.author]
+    include: [db.author,db.comment],
   })
   .then(function(post) {
     if (!post) throw Error();
@@ -40,6 +40,18 @@ router.get('/:id', function(req, res) {
   })
   .catch(function(error) {
     res.status(400).render('main/404');
+  });
+});
+
+// POST /posts/:id - display a specific post and its author
+router.post('/:id/comments', function(req, res) {
+  db.comment.create({
+    name: req.body.name,
+    content: req.body.content,
+    postId: req.params.id
+  }).then(function(comment) {
+    console.log(comment.get());
+    res.redirect('/posts/'+req.params.id)
   });
 });
 

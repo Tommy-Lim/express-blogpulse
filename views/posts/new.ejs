@@ -13,7 +13,7 @@
         <option value="<%= author.id %>"><%= author.getFullName() %></option>
       <% }); %>
     </select>
-    <p>If your name doesn't show up, please <a href="/authors/new">sign up to be an author.</a></p>
+    <p>If your name doesn't show up, please <a id="new-author-link" href="/authors/new">sign up to be an author.</a></p>
   </div>
 
   <div class="form-group">
@@ -23,3 +23,28 @@
 
   <input type="submit" class="btn btn-primary">
 </form>
+
+
+
+<div class="well" id="new-author-well">
+  <h1>Sign up for BlogPulse</h1>
+
+  <form action="/authors" method="POST">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" class="form-control" id="firstName" name="firstName" required>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" class="form-control" id="lastName" name="lastName" required>
+    </div>
+
+    <div class="form-group">
+      <label for="bio">Bio</label>
+      <textarea type="text" class="form-control" id="bio" name="bio" required></textarea>
+    </div>
+
+    <input type="submit" class="btn btn-primary">
+  </form>
+</div>
