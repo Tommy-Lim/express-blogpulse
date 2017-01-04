@@ -6,5 +6,10 @@ $(document).ready(function() {
     $('#new-author-well').toggle();
   });
 
+  $('#close-new-author-form').on('click',function(e){
+    $('#new-author-well').toggle();
+  });
+
+
 
 });
