@@ -7,9 +7,9 @@
 <p><%= post.content %></p>
 
 <% post.tags.forEach(function(tag){ %>
-  <span class="btn btn-xs btn-info">
+  <a class="btn btn-xs btn-info" href="/tags/<%- tag.id %>">
     #<%= tag.name %>
-  </span>
+  </a>
 <% }); %>
 
 <hr />

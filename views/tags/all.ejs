@@ -1,0 +1,8 @@
+<h1>All tags</h1>
+<div class="container well">
+  <% tags.forEach(function(tag){ %>
+    <a class="btn btn-info" href="./<%- tag.id %>">
+      #<%= tag.name %>
+    </a>
+  <% }); %>
+</div>

@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-sm-8">
+    <h1>Latest Posts Matching #<%= tag.name %></h1>
+
+    <% tag.posts.reverse().forEach(function(post) { %>
+      <div class="well">
+        <h2>
+          <a href="/posts/<%= post.id %>"><%= post.title %></a>
+        </h2>
+        <p>
+          <strong><%= moment(post.createdAt).calendar() %></strong>
+        </p>
+      </div>
+    <% }); %>
+
+  </div>
+
+</div>
