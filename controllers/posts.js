@@ -46,12 +46,12 @@ router.get('/:id', function(req, res) {
 // POST /posts/:id - display a specific post and its author
 router.post('/:id/comments', function(req, res) {
   db.comment.create({
-    name: req.body.name,
+    name: req.body.name || 'Anonymous',
     content: req.body.content,
     postId: req.params.id
   }).then(function(comment) {
     console.log(comment.get());
-    res.redirect('/posts/'+req.params.id)
+    res.redirect('/posts/'+req.params.id);
   });
 });
 

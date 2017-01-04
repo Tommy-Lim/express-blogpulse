@@ -1,4 +1,5 @@
-// Add these snippets to the end of the index.js in root directory
+// Add these snippets to the end of the index.js in root directory OR
+// Run by command 'node dbTest.js' in command line while in directory
 
 
 // Test adding to the comments data table
