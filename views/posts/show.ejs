@@ -6,6 +6,12 @@
 
 <p><%= post.content %></p>
 
+<% post.tags.forEach(function(tag){ %>
+  <span class="btn btn-xs btn-info">
+    #<%= tag.name %>
+  </span>
+<% }); %>
+
 <hr />
 
 <h4>Comment on this post</h4>
