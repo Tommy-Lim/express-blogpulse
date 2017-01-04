@@ -1,18 +1,15 @@
 var express = require('express');
+var async = require('async');
 var db = require('../models');
 var router = express.Router();
 
 // POST /posts - create a new post
 router.post('/', function(req, res) {
-  console.log('req body is: ',req.body);
 
   // make the comma seperted list into array
   var tags = [];
   if(req.body.tags){
      tags = req.body.tags.split(',');
-    console.log(tags);
-  } else{
-    console.log('NO TAGS');
   }
 
   // check if the title is greater than 2 letters
@@ -32,8 +29,8 @@ router.post('/', function(req, res) {
   })
   .then(function(post) {
     if(tags.length > 0){
-      //add tags here
-      tags.forEach(function(tag){
+      //if tags, add tags using async iterator
+      async.eachSeries(tags, function(tag, callback){
         db.tag.findOrCreate({
           where: {name: tag}
         })
@@ -42,10 +39,17 @@ router.post('/', function(req, res) {
             // add the relationship in the third table, post_tag
             post.addTag(newTag);
           }
+          //this tells when to iterate the eachSeries
+          callback(null);
         });
-      }); // and of forEach
+      }, function(){
+        //this tells when the iteration is complete
+        res.redirect('/posts/'+post.id);
+      }); // end of forEach
+    } // end of if statement, run if no tags
+    else{
+      res.redirect('posts/'+post.id);
     }
-    res.redirect('/');
   })
   .catch(function(error) {
     res.status(400).render('main/404');
@@ -59,6 +63,7 @@ router.get('/new', function(req, res) {
     res.render('posts/new', { authors: authors });
   })
   .catch(function(error) {
+    console.log(error);
     res.status(400).render('main/404');
   });
 });
